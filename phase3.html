@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Will McLean - Talk</title>
+    <title>Phase 3</title>
     <meta name="description" content="An exercise by Will McLean.">
     <style>
         body {
@@ -22,23 +22,8 @@
 
         .canvas div {
             position: absolute;
-
-            /*Squares*/
-            /*background-color: white;*/
-            /*width: 10px;*/
-            /*height: 10px;*/
-
-            /*Dots*/
-            /*border-radius: 50%;*/
-            /*border: 1px solid;*/
-            /*width: 30px;*/
-            /*height: 30px;*/
-            /*color: white;*/
-            /*background-color: black;*/
-            /*transform: translate(-50%, -50%);*/
-
-            /*Lines*/
-            width: 1px;
+            width: 0.5px;
+            top: 50%;
             height: 500px;
             background-color: white;
             transform: translate(-50%, -50%);
@@ -52,18 +37,12 @@
 <script type="text/javascript">
   let canvas = document.querySelector( '.canvas' );
   let canvasPos = canvas.getBoundingClientRect();
-  let style = 'dot';
 
   function mouseMoveHandler( event ) {
-    switch ( style ) {
-      case 'dot':
-        let currentMousePos = [ event.clientX, event.clientY ];
-        let div = document.createElement( 'div' );
-        div.style.top = currentMousePos[ 1 ] - canvasPos.top + 'px';
-        div.style.left = currentMousePos[ 0 ] - canvasPos.left + 'px';
-        canvas.appendChild( div );
-        break;
-    }
+    let currentMousePos = [ event.clientX, event.clientY ];
+    let div = document.createElement( 'div' );
+    div.style.left = currentMousePos[ 0 ] - canvasPos.left + 'px';
+    canvas.appendChild( div );
   }
 
   document.addEventListener( 'mousemove', mouseMoveHandler );
