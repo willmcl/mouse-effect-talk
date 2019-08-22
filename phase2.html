@@ -22,12 +22,9 @@
 
         .canvas div {
             position: absolute;
-            border-radius: 50%;
-            border: 1px solid;
-            width: 30px;
-            height: 30px;
-            color: white;
-            background-color: black;
+            background-color: white;
+            width: 1px;
+            height: 500px;
             transform: translate(-50%, -50%);
         }
 
@@ -39,12 +36,15 @@
 <script type="text/javascript">
   let canvas = document.querySelector( '.canvas' );
   let canvasPos = canvas.getBoundingClientRect();
+  let rotation = 0;
 
   function mouseMoveHandler( event ) {
     let currentMousePos = [ event.clientX, event.clientY ];
     let div = document.createElement( 'div' );
     div.style.top = currentMousePos[ 1 ] - canvasPos.top + 'px';
     div.style.left = currentMousePos[ 0 ] - canvasPos.left + 'px';
+    div.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
+    rotation++;
     canvas.appendChild( div );
   }
 

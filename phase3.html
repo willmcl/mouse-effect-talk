@@ -22,11 +22,11 @@
 
         .canvas div {
             position: absolute;
-            width: 0.5px;
-            top: 50%;
+            width: 1px;
             height: 500px;
             background-color: white;
             transform: translate(-50%, -50%);
+            transform-origin: center;
         }
 
     </style>
@@ -37,11 +37,48 @@
 <script type="text/javascript">
   let canvas = document.querySelector( '.canvas' );
   let canvasPos = canvas.getBoundingClientRect();
+  let rotation = 0;
+  let hue = 0;
+  let lum = 50;
+  let lumIncreasing = true;
+  let height = 300;
+  let heightIncreasing = false;
 
   function mouseMoveHandler( event ) {
     let currentMousePos = [ event.clientX, event.clientY ];
     let div = document.createElement( 'div' );
     div.style.left = currentMousePos[ 0 ] - canvasPos.left + 'px';
+    div.style.top = currentMousePos[ 1 ] - canvasPos.top + 'px';
+    div.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
+    rotation++;
+
+    div.style.backgroundColor = 'hsl(' + hue + ', 50%, ' + lum + '%)';
+    if (hue < 360) { hue++; } else { hue = 0; }
+    if ( lum < 100 && lumIncreasing ) {
+      lum++;
+    } else if( lum > 0 && !lumIncreasing ) {
+      lum--;
+    } else if( lum === 100 ) {
+      lumIncreasing = false;
+      lum--;
+    } else if( lum === 0 ) {
+      lumIncreasing = true;
+      lum++;
+    }
+
+    div.style.height = height + 'px';
+    if ( height < 300 && heightIncreasing ) {
+      height++;
+    } else if( height > 0 && !heightIncreasing ) {
+      height--;
+    } else if( height === 300 ) {
+      heightIncreasing = false;
+      height--;
+    } else if( height === 0 ) {
+      heightIncreasing = true;
+      height++;
+    }
+
     canvas.appendChild( div );
   }
 
